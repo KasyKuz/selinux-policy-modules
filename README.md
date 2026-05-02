@@ -12,4 +12,5 @@ sudo semodule -i module_1.pp
 ```
 
 Модули необходимо тестировать в режиме Enfrosing, для этого ноебходимо выполнить: `sudo setenforce 1`
+
 Удалить модули можно с помощью команды: `sudo semodule -r module_1`
