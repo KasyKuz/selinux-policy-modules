@@ -1,0 +1,15 @@
+
+module no_symlinks 1.0;
+
+require {
+    type unconfined_t;
+    type etc_t;
+    class lnk_file { create };
+}
+
+neverallow unconfined_t etc_t:lnk_file { create };
+
+
+ checkmodule -M -m -o no_symlinks.mod no_symlinks.te
+bos@localhost:~/Загрузки/modules$ semodule_package -o no_symlinks.pp -m no_symlinks.mod
+bos@localhost:~/Загрузки/modules$ sudo semodule -i no_symlinks.pp

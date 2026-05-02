@@ -1,0 +1,45 @@
+
+module module_3 1.0;
+
+require{
+	
+	type unconfined_t;
+	class file {read write open getattr create setattr append unlink link rename append};
+}
+type hidden_config_t;
+allow unconfined_t hidden_config_t:file { getattr  read open };
+
+---------------------------------------------------------------
+
+module module_3 1.0;
+require{
+	
+	type unconfined_t;
+	class file {rename setattr getattr read write unlink};
+}
+type hidden_config_t;
+allow unconfined_t hidden_config_t:file read;
+
+
+
+----------------------------------------------------
+module crypto_keys_protection 1.0;
+
+require {
+    class file { read write getattr unlink rename setattr link };
+
+    class dir { search add_name remove_name };
+}
+
+type crypto_key_t;
+
+
+neverallow crypto_key_t:file {getattr rename unlink link write setattr};
+
+
+allow crypto_key_t:file read;
+
+
+allow crypto_key_t:dir { search add_name remove_name };
+
+allow crypto_reader_t crypto_key_t:file read;

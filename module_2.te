@@ -1,0 +1,20 @@
+module module_4 1.0;
+require{
+	type bin_t;
+	type user_t;
+	#type net_t;
+	type unconfined_t;
+	type ifconfig_exec_t;
+	type mount_exec_t;
+	class file {execute};
+}
+
+neverallow unconfined_t ifconfig_exec_t:file {execute};
+neverallow unconfined_t mount_exec_t:file {execute};
+
+
+#neverallow unconfined_t net_t:file {execute};
+#neverallow unconfined_t bin_t:file {execute};
+
+#neverallow user_t bin_t:file {execute};
+
